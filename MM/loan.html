@@ -1,0 +1,1329 @@
+<html>
+   <!DOCTYPE html>
+   <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>Member</title>
+      <link rel="icon" type="image/x-icon" href="logo.png" />
+      <link
+         href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+         rel="stylesheet"
+         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+         crossorigin="anonymous"
+         />
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link
+         href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+         rel="stylesheet"
+         />
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+   </head>
+   <style>
+      body {
+      background: #F58F7C;
+      font-family: system-ui;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(
+      to bottom,
+       #4F4F51,
+       #4F4F51 18%,
+      black 1%,
+      black 5%,
+      #F58F7C 19%,
+      #F58F7C
+      );
+      }
+      .tab {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+      box-shadow: 0 5px 10px #F58F7C;
+      }
+      /* Style the buttons that are used to open the tab content */
+      .tab button {
+      color: white;
+      background-color:  #4F4F51;
+      cursor: pointer;
+      padding: 14px 16px;
+      transition: 0.3s;
+      }
+      /* Change background color of buttons on hover */
+      .tab button:hover {
+      background-color: #F58F7C;
+      }
+      #existingtable {
+      overflow-y: scroll;
+      overflow-x: scroll;
+      height: 200px;
+      }
+      thead tr th {
+      position: sticky;
+      top: 0;
+      }
+      tbody td:nth-child(1) {
+      font-size: 20px;
+      font-weight: bold;
+      }
+      tbody td:nth-child(1) {
+      text-align: center;
+      }
+      table {
+      border-collapse: separate;
+      border-spacing: 0 10px;
+      }
+      th,
+      td {
+      width: 500px;
+      text-align: center;
+      padding: 5px;
+      }
+      tr{
+      border-radius: 10px;
+      }
+      .logoutbtn {
+  background-color: DodgerBlue;
+  border: none;
+  color: white;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
+#summary{
+   margin-top:1% !important;
+   margin-bottom : 1% !important;
+}
+
+/* The snackbar - position it at the bottom and in the middle of the screen */
+#snackbar {
+  visibility: hidden; /* Hidden by default. Visible on click */
+  min-width: 250px; /* Set a default minimum width */
+  margin-left: -125px; /* Divide value of min-width by 2 */
+  background-color: red; /* Black background color */
+  color: #fff; /* White text color */
+  text-align: center; /* Centered text */
+  border-radius: 2px; /* Rounded borders */
+  padding: 16px; /* Padding */
+  position: fixed; /* Sit on top of the screen */
+  z-index: 1; /* Add a z-index if needed */
+  left: 50%; /* Center the snackbar */
+  bottom: 30px; /* 30px from the bottom */
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#snackbar.show {
+  visibility: visible; /* Show the snackbar */
+  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+  However, delay the fade out process for 2.5 seconds */
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+  #savingDiv {
+      display: none;
+   }
+
+   .switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #323278;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color:  #4F4F51;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px  #4F4F51;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+  margin-top: -1px;
+  border: 2px solid black;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+ 
+   </style>
+   <body>
+      <div
+         style="
+         display: flex;
+         flex-direction: column;
+         height: 100%;
+         width: 100%;
+         align-items: center;    overflow: scroll;
+         "
+         >
+         <div
+            style="
+            height: 20%;
+            width: 100%;
+            justify-content: space-between;
+            display: flex;
+            flex-direction: column;
+            "
+            >
+            <div class="logo" style="height: 10%; width: 100%; padding: 10px">
+               <div
+                  style="
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: space-around;
+                  "
+                  >
+                  <div style="width: 30%">
+                     <img
+                        src="logo.png"
+                        style="height: 50%; width: 50%; border-radius: 5px"
+                        />
+                        
+                  </div>
+                  <div style="width: 40%; margin: 1%">
+                     <h1 id="idnoshow" style="color:white;width: 40%;"></h1>
+                  </div>
+                  <div style="width: 20%; margin: 1%">
+                     <div
+                        class="form-group mx-sm-3 mb-2"
+                        style="display: flex; flex-direction: row"
+                        >                        
+                        <button type="submit"
+                        class="btn btn-primary mb-2"
+                        style="
+                        margin: 5px;
+                        background-color:  #4F4F51;
+                        border: 2px solid #F58F7C;
+                        color: white;width: 50%;
+                        " onclick="logoutUser()"><i class="fa fa-sign-out"></i> Logout</button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="tab">
+               <button
+                  class="tablinks"
+                  id="loan"
+                  style="
+                  width: 50%;
+                  border: 1px solid #F58F7C;
+                  font-weight: bold;
+                  border-radius: 10px;
+                  "
+                  onclick="showloanpage()"
+                  >
+               Loan
+               </button>
+               
+               <button
+                  class="tablinks"
+                  id="savings"
+                  style="
+                  width: 50%;
+                  border: 1px solid #F58F7C;
+                  font-weight: bold;
+                  border-radius: 10px;
+                  "
+                  onclick="showsavingspage()"
+                  >
+               Savings
+               </button>
+
+               <button
+                  class="tablinks"
+                  id="memberloan"
+                  style="
+                  width: 50%;
+                  border: 1px solid #F58F7C;
+                  font-weight: bold;
+                  border-radius: 10px;
+                  "
+                  onclick="showapplymemberrecords() "
+                  >
+               Members Loan
+               </button>
+            </div>
+         </div>
+         <div style="margin-top: 5px;display: none;" id="updateSwitch">
+            <label class="switch">
+               <input type="checkbox" id="isUpdateClicked" onchange="stateUpdate()">
+               <span class="slider round"></span>
+             </label>
+             <span>Update loan</span>
+         </div>
+         <div class="updateMemberForm"
+            id="updateMemberTableForm"
+            style="display: flex; justify-content: center; width: 100%">
+               <input
+                  name="dueamount"
+                  type="number"
+                  class="form-control"
+                  id="inputdueamountupdatebulk"
+                  placeholder="Due Amount"
+                  style="margin: 1%"
+               />
+               <input
+                  class="form-control"
+                  type="text"  placeholder="Update date" onclick="(this.type='date')"
+                  id="inputdateupdatebulk"
+                  name="updateDate"
+                  style="margin: 1%"
+               />
+               <input
+                  class="form-control"
+                  type="text"  placeholder="Actual date" onclick="(this.type='date')"
+                  id="inputdateupdatebulkactual"
+                  name="actualDate"
+                  style="margin: 1%"
+               />               
+               <button
+                  type="submit"
+                  class="btn btn-primary mb-2"
+                  id="applynowsumbit"
+                  style="
+                  margin: 5px;
+                  background-color:  #4F4F51;
+                  border: 2px solid #F58F7C;
+                  color: white;width: 100%;
+                  "
+                  onclick="updateBulkNow()"
+               >
+                  Update All
+               </button>
+         </div>
+         <div
+            class="applymembereform"
+            id="applymembertableform"
+            style="display: flex; justify-content: center; width: 100%"
+         >
+         <input
+            name="totalamount"
+            type="number"
+            class="form-control"
+            id="inputtotalamountbulk"
+            placeholder="Total Amount"
+            style="margin: 1%"
+            />
+            <input
+               name="servicecharge"
+               type="number"
+               class="form-control"
+               id="serviceChargeamountbulk"
+               placeholder="Service charge"
+               style="margin: 1%"
+            />
+         <input
+            name="dueamount"
+            type="number"
+            class="form-control"
+            id="inputdueamountbulk"
+            placeholder="Due Amount"
+            style="margin: 1%"
+            />
+         <input
+            name="occurence"
+            type="number"
+            class="form-control"
+            id="inputoccurencebulk"
+            placeholder="occurence "
+            style="margin: 1%"
+            />
+         <select class="form-control" id="inputoccurbybulk" style="margin: 1%">
+            <option name="Daily" value="0">Daily</option>
+            <option name="Weekly" value="1">Weekly</option>
+            <option name="Monthly" value="2">Monthly</option>
+         </select>
+         <input
+            class="form-control"
+            type="text"  placeholder="Given Date" onclick="(this.type='date')"
+            id="issueDatebulk"
+            name="issueDate"
+            style="margin: 1%"
+            />
+         <input
+            class="form-control"
+            type="text"  placeholder="Start Date" onclick="(this.type='date')"
+            id="inputdatebulk"
+            name="actualDate"
+            style="margin: 1%"
+            />
+         <button
+            type="submit"
+            class="btn btn-primary mb-2"
+            id="applynowsumbitbulkLoan"
+            style="
+            margin: 5px;
+            background-color: #323278;
+            border: 2px solid #F58F7C;
+            color: white;width: 100%;
+            "
+            onclick="applyBulknow()"
+         >
+         Apply now
+         </button>
+         <button
+            type="button"
+            class="btn btn-primary mb-2"
+            id="applynowsumbit"
+            onclick="memberloanprint()"
+            style="
+            margin: 5px; 
+            background-color: #323278; 
+            border: 2px solid #F58F7C; 
+            color: white; 
+            width: 100%;"
+         >
+         <i class="fa fa-print"></i> Print
+         </button>
+         </div>
+         <div
+            class="savingsform"
+            id="savingsform"
+            style="
+            display: flex;
+            flex-direction: column;
+            width: 90%;
+            "
+            >
+            <div style="display: flex; justify-content: space-around; margin: 1%">
+               <input
+                  name="amount"
+                  type="number"
+                  class="form-control"
+                  id="inputamount"
+                  placeholder="Amount"
+                  style="margin: 1%"
+                  />
+               <input
+                  class="form-control"
+                  type="date"
+                  id="savingDateinput"
+                  name="actualDate"
+                  style="margin: 1%"
+                  placeholder="saving date"
+                  />
+               <button
+                  type="submit"
+                  class="btn btn-primary mb-2"
+                  style="
+                  margin: 5px;
+                  background-color:  #4F4F51;
+                  border: 2px solid #F58F7C;
+                  color: white;width: 100%;
+                  "
+                  onclick="saveSavings()"
+                  >
+               Save
+               </button>
+            </div>
+            <div class="display" id="savingDiv" style="margin: 2%;overflow-y: scroll;min-height: 30%;max-height: 50%;">
+               <table class="table table-light table-hover" style="background-color: white;" id="savingsTable">
+                  <thead>
+                     <tr>
+                        <th scope="col" id="idmember">Amount</th>
+                        <th scope="col" id="idloanmember">Saving Date</th>
+                        </th>
+                     </tr>
+                  </thead>
+                  <tbody id="savingsBodyId">
+                  </tbody>
+               </table>
+            </div>
+         </div>
+         <div
+            class="loantabs tab"
+            id="loantabs"
+            style="text-align: center; margin: 1%"
+            >
+            <div
+               class="btn btn-light"
+               id="complete"
+               style="
+               width: 30%;
+               background-color: #F58F7C ;
+               border: 4px solid  #4F4F51;
+               font-weight: bold;
+               border-radius: 10px;
+               "
+               onclick="showcompleterecords()"
+               >
+               Completed
+            </div>
+            <div
+               class="btn btn-light"
+               id="existing"
+               style="
+               width: 30%;
+               background-color: #F58F7C ;
+               border: 4px solid  #4F4F51;
+               font-weight: bold;
+               border-radius: 10px;
+               "
+               onclick="showexistingrecords()"
+               >
+               Existing
+            </div>
+            <div
+               class="btn btn-light"
+               id="applynew"
+               style="
+               width: 30%;
+               background-color: #F58F7C ;
+               border: 4px solid   #4F4F51;
+               font-weight: bold;
+               border-radius: 10px;
+               "
+               onclick="showapplyrecords()"
+               >
+               Apply New
+            </div>
+         </div>
+         <div id="showtableshere" style="display: flex;flex-direction: column;align-items: center;">
+         </div>
+         <span id="noLoansYet" style="font-weight: bold; font-size: x-large;padding-top: 2%;">No Loan taken ! go to apply new to create New Loan</span>
+         
+         
+        <div id="completetable"  style="display: flex;flex-direction: column;align-items: center;"></div>
+
+        <div id="memberloanapplytable"  style="display: flex;flex-direction: column;align-items: center;"></div>
+         <div
+            class="applyform"
+            id="applytableform"
+            style="display: flex; justify-content: center; width: 100%"
+            >
+            <input
+               name="totalamount"
+               type="number"
+               class="form-control"
+               id="inputtotalamount"
+               placeholder="Total Amount"
+               style="margin: 1%"
+               />
+               <input
+                  name="servicecharge"
+                  type="number"
+                  class="form-control"
+                  id="serviceChargeamount"
+                  placeholder="Service charge"
+                  style="margin: 1%"
+            />
+            <input
+               name="dueamount"
+               type="number"
+               class="form-control"
+               id="inputdueamount"
+               placeholder="Due Amount"
+               style="margin: 1%"
+               />
+            <input
+               name="occurence"
+               type="number"
+               class="form-control"
+               id="inputoccurence"
+               placeholder="occurence "
+               style="margin: 1%"
+               />
+            <select class="form-control" id="inputoccurby" style="margin: 1%">
+               <option name="Daily" value="0">Daily</option>
+               <option name="Weekly" value="1">Weekly</option>
+               <option name="Monthly" value="2">Monthly</option>
+            </select>
+            <input
+               class="form-control"
+               type="text"  placeholder="Given Date" onclick="(this.type='date')"
+               id="issueDate"
+               name="issueDate"
+               style="margin: 1%"
+               />
+            <input
+               class="form-control"
+               type="text"  placeholder="Start Date" onclick="(this.type='date')"
+               id="inputdate"
+               name="actualDate"
+               style="margin: 1%"
+               />
+            <button
+               type="submit"
+               class="btn btn-primary mb-2"
+               id="applynowsumbit"
+               style="
+               margin: 5px;
+               background-color:  #4F4F51;
+               border: 2px solid #F58F7C;
+               color: white;width: 100%;
+               "
+               onclick="applynow()"
+               >
+            Apply now
+            </button>
+            
+         </div>
+         <div class="display" id="applynowtable" style="display: flex;justify-content: center;align-items: center;">
+            <table class="table table-light table-hover" id="myTable" style="width: 70%;">
+            <thead>
+              <tr>
+                <th scope="col" id="avatar"><input class="form-check-input" type="checkbox" id="selectAllCheck" name="checkAll" value="checkAllBox" onchange="checkAllMembers()">&nbsp;S.No</th>
+                <th scope="col" id="name">Name</th>
+                <th scope="col" id="idno">Idno</th>
+                <th scope="col" id="mobilenumber">Mobilenumber</th>
+                <th scope="col" id="aadharnumber">Aadharnumber</th>
+               
+                </th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+         </div>
+         <div id="snackbar"></div>
+         </div>
+      </div>
+      </div>
+   </body>
+   <script>
+
+      function updateBulkNow(){
+         let updateDue = document.getElementById('inputdueamountupdatebulk').value;
+         let updateUpdateDate = document.getElementById('inputdateupdatebulk').value;
+         let updateActualDate = document.getElementById('inputdateupdatebulkactual').value;
+         
+
+         fetch("loanupdatebulk.php", {
+               method: "POST",
+               headers: {
+               "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+               "Access-Control-Allow-Origin": "*",
+               },
+               body: `updateDue=${updateDue}&updateUpdateDate=${updateUpdateDate}&updateActualDate=${updateActualDate}&members=${createMemberArray}`,
+            }).then((response) => {
+               if (response.status === 200) {
+                  result = "data received successfully";
+               } else if (response.status === 404) {
+                  result = "Requested data not found.";
+               } else {
+                  console.log(`Error`);
+               }
+               document.getElementById("inputdueamountupdatebulk").value = '';
+               document.getElementById("inputdateupdatebulk").value = '';
+               document.getElementById("inputdateupdatebulkactual").value = '';
+               showexistingrecords();
+            });  
+
+
+
+      }
+
+      function stateUpdate(){
+         let isUpdate = document.getElementById('isUpdateClicked').checked;
+         let applyNewEle = document.getElementById('applymembertableform');
+         let updateEle = document.getElementById('updateMemberTableForm');
+         if(isUpdate){
+            applyNewEle.style.display = 'none';
+            updateEle.style.display = 'flex';
+         }else{
+            applyNewEle.style.display = 'flex';
+            updateEle.style.display = 'none';
+         }
+      }
+
+function snackbarFunction(inputStr) {
+      var x = document.getElementById("snackbar");
+   
+      x.innerHTML= inputStr;
+      x.className = "show";
+      setTimeout(function () {
+         x.className = x.className.replace("show", "");
+      }, 2500);
+   }
+
+   function memberArrayHasValue(){
+      if(createMemberArray.length === 0){
+            document.getElementById('applynowsumbitbulkLoan').style.display = 'none';
+      }else{
+         document.getElementById('applynowsumbitbulkLoan').style.display = 'block';
+      }
+   }
+
+   function checkAllMembers(){
+      //donothing
+      let selectAllCheckBox = document.getElementById('selectAllCheck');
+      createMemberArray = [];
+      if (selectAllCheckBox.checked) {
+         for(let i=0;i<memberTotalIds.length;i++){
+            createMemberArray.push(parseInt(memberTotalIds[i]));
+         }
+         console.log("all members selected"+createMemberArray);
+         for(let i=0;i<memberTotalIds.length;i++){
+            document.getElementById('memberloancheck_'+i).checked=true;
+         }
+         memberArrayHasValue();
+      }
+      else{
+         for(let i=0;i<memberTotalIds.length;i++){
+            console.log("all members deselected"+createMemberArray);
+            document.getElementById('memberloancheck_'+i).checked=false;
+         }
+         memberArrayHasValue();
+      }
+      
+   }
+
+function buttoncheck(idmember, idloanmember) {
+  fetch("updatecomplete.php?idloanmember=" + idloanmember + "&idmember=" + idmember, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "Access-Control-Allow-Origin": "*",
+    },
+  })
+  .then((response) => {
+   if (response.status === 409) {
+      snackbarFunction("Total amount and sum of due amount is not matching");
+      return;
+   }
+   showcompleterecords();
+  });
+}
+function memberloanprint() {
+    window.open("downloadmemberloan.php?idmember=" + idmember, "_blank");
+}
+
+function download() {
+   var idloan = lead[0];
+   window.open("loantable.php?idloan=" + idloan, "_blank");
+
+   }
+function updateloan(idloan, rowItr,loanItr,idloanmember){
+   var dueamount=document.getElementById("inputdueamount"+rowItr).value;
+   var paymentdate=document.getElementById("inputpaymentdate"+rowItr).value;
+   var penaltyInput = document.getElementById("inputpenality"+rowItr).value;
+   console.log("nila"+paymentdate+"pay");
+   
+   
+   fetch("updateloan.php", {
+      method: "POST",
+      headers: {
+      "Content-Type":
+         "application/x-www-form-urlencoded; charset=UTF-8",
+      "Access-Control-Allow-Origin": "*",
+      },
+      body: `idloan=${idloan}&dueamount=${dueamount}&paymentdate=${paymentdate}&penality=${penaltyInput}&idmember=${idmember}&idloanmember=${idloanmember}`,
+   }).then((response) => {
+      showexistingrecords();
+   });
+}
+
+function renderTable(idmember,iscompleted){
+   fetch("countofloan.php?idmember="+idmember+"&completed="+iscompleted,{
+      method: "POST",
+      headers: {
+      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      "Access-Control-Allow-Origin": "*",
+      },         
+   }).then((response) => {
+      response.text().then(function (text){
+         text = text.substr(0, text.lastIndexOf(","));
+         var textArr = text.split(',');
+         var showTableDiv = document.getElementById( 'showtableshere' );
+         showTableDiv.innerHTML = '';
+         if(textArr.length>0 && textArr[0]!=0){
+            for(let i=0;i<textArr.length;i++){
+            fetch("loantable.php?idmember=" + idmember+"&idloanmember="+textArr[i]+"&completed="+iscompleted, {
+               method: "POST",
+               headers: {
+               "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+               "Access-Control-Allow-Origin": "*",
+               },
+               }).then((response) => {
+               response.text().then(function (text) {
+                 describetable(text,i,textArr[i]);
+               })
+            });
+            }
+         }
+         else{
+            document.getElementById("noLoansYet").style.display = "block";
+         }
+      });
+   });
+}
+
+function deleteLoan(idmember,idloanmember){  
+   
+   fetch("deleteloan.php", {
+      method: "POST",
+      headers: {
+         "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+         "Access-Control-Allow-Origin": "*",
+      },
+      body: `idmember=${idmember}&idloanmember=${idloanmember}`,
+      }).then((response) => {
+         console.log("deleted");
+         snackbarFunction("Deleted Successfully");
+         showexistingrecords();
+      });
+}
+
+function printloan(idmember,idloanmember){
+
+   window.open("downloadloan.php?idmember=" + idmember+"&idloanmember="+idloanmember, "_blank");
+}
+
+function describetable(text,k,idloanmember){
+   var showTableDiv = document.getElementById( 'showtableshere' );
+   var startStr = '<div id="summary" style="display: flex;width: 90%;font-size: x-large;font-weight: bold;flex-direction: column;border: 5px solid  #4F4F51;border-radius: 20px;padding: 10px;background-color: lightgrey;height: auto;max-height: 60%;"><div style="display: flex;flex-direction: row;justify-content: space-around;"><div><span id="tableTitleCard"></span></div><div style="display: flex;justify-content: space-around;width: 15%;"><div id="adminrights" style="display:none"><button type="submit" class="btn btn-success mb-2" id="admincheckbutton'+k+'" name="completed"style="width: 100%;" onclick="buttoncheck('+idmember+','+idloanmember+')"><i class="fa fa-check"></i></button></div><div><button type="submit" onclick="printloan('+idmember+','+idloanmember+')" class="btn btn-primary " style="width: 100%"><i class="fa fa-print"></i></button></div><div><button type="submit" onclick="deleteLoan('+idmember+','+idloanmember+')" class="btn btn-danger" style="width: 100%"><i class="fa fa-trash"></i></button></div></div></div><div style="width: 100%;height: 100%;overflow:scroll"><table class="table table-light table-hover " id="existingtable_'+k+'" style="border-radius: 10px;font-size: large;width: 100%;overflow: scroll;height: 90%;"><thead><tr style="font-size:large "><th scope="col" id="loanCountno">No</th><th scope="col" id="totalamount">Total Amount</th><th scope="col" id="actualdate">Actual Date</th><th scope="col" id="dueamount">Due Amount</th><th scope="col" id="penality">penality</th><th scope="col" id="paymentdate">Payment Date</th><th scope="col" id="savebtn">Save Loan</th></th><div style="display:flex"><input name="penality" type="number" class="form-control"  id="inputPenality'+k+'" placeholder="Penalty "style="margin: 1%;height: 10%;width:20%;"/><span id="balanceAmount_'+k+'"></span></div></tr></thead><tbody >';
+   var endStr = '</tbody></table></div></div>';
+      showTableDiv.insertAdjacentHTML( 'afterbegin', startStr );
+      if(sessionStorage.getItem("mmauth")!=null && sessionStorage.getItem("mmauth")!=0 && sessionStorage.getItem("mmauth").slice(0,2)=='ad'){
+            document.getElementById("adminrights")? document.getElementById("adminrights").style.display="block" : '';           
+      }
+      var leaders = text.split(",_,");
+      leaders.pop();
+      
+      var tbody = document
+         .getElementById("existingtable_"+k)
+         .getElementsByTagName("tbody")[0];
+
+      for (i = 0; i < leaders.length; i++) {
+         var lead = leaders[i].split(",-,");
+         document.getElementById('tableTitleCard').innerHTML = 'Given date : '+lead[5];
+         // document.getElementById('inputPenality_'+k).value = lead[6];
+         document.getElementById('balanceAmount_'+k).innerHTML = 'Balance Amount : '+lead[7];
+         
+         var row = tbody.insertRow();
+
+         var cell1 = row.insertCell(0);
+         cell1.innerHTML = i+1;
+      
+         var cell2 = row.insertCell(1);
+         cell2.innerHTML = lead[1]!=0?lead[1]:'---';
+      
+         var cell3 = row.insertCell(2);
+         cell3.innerHTML = lead[2];
+
+         // var cell4= row.insertCell(3);
+         // cell4.innerHTML = lead[3];
+      
+         if(sessionStorage.getItem("mmauth")!=null && sessionStorage.getItem("mmauth")!=0 && sessionStorage.getItem("mmauth").slice(0,2)=='us'){
+            var cell4 = row.insertCell(3);
+         cell4.innerHTML = '<input  name="dueamount" value='+lead[3]+' type="number" disabled class="form-control" id="inputdueamount'+i+'" placeholder="Due Amount">',lead[3];
+         }
+         else{
+            var cell4 = row.insertCell(3);
+         cell4.innerHTML = '<input  name="dueamount" value='+lead[3]+' type="number" class="form-control" id="inputdueamount'+i+'" placeholder="Due Amount">',lead[3];
+         }    
+         console.log("dd"+lead[6]);
+         if(sessionStorage.getItem("mmauth")!=null && sessionStorage.getItem("mmauth")!=0 && sessionStorage.getItem("mmauth").slice(0,2)=='us'){
+            var cell5 = row.insertCell(4);
+            if(lead[6]!=""){
+               cell5.innerHTML = '<input class="form-control" value='+lead[6]+' disabled type="number" id="inputpenality'+i+'" placeholder="Penality" name="penality" />'
+            }
+            else{
+               cell5.innerHTML = '<input class="form-control" disabled type="number" id="inputpenality'+i+'" placeholder="Penality" name="penality" />'
+            }
+         }
+         else{
+            var cell5= row.insertCell(4);
+            if(lead[6]!=""){
+               cell5.innerHTML = '<input class="form-control" value='+lead[6]+' type="number" id="inputpenality'+i+'" placeholder="Penality" name="penality" />'
+            }
+            else{
+               cell5.innerHTML = '<input class="form-control" type="number" id="inputpenality'+i+'" placeholder="Penality" name="penality" />'
+            }
+         } 
+
+
+         if(sessionStorage.getItem("mmauth")!=null && sessionStorage.getItem("mmauth")!=0 && sessionStorage.getItem("mmauth").slice(0,2)=='us'){
+            var cell6 = row.insertCell(5);
+            if(lead[4]!=""){
+               cell6.innerHTML = '<input class="form-control" value='+lead[4]+' disabled type="date" id="inputpaymentdate'+i+'" name="paymentdate" />'
+            }
+            else{
+               cell6.innerHTML = '<input class="form-control" disabled type="date" id="inputpaymentdate'+i+'" name="paymentdate" />'
+            }
+         }
+         else{
+            var cell6 = row.insertCell(5);
+            if(lead[4]!=""){
+               cell6.innerHTML = '<input class="form-control" value='+lead[4]+' type="date" id="inputpaymentdate'+i+'" name="paymentdate" />'
+            }
+            else{
+               cell6.innerHTML = '<input class="form-control" type="date" id="inputpaymentdate'+i+'" name="paymentdate" />'
+            }
+         } 
+
+         if(sessionStorage.getItem("mmauth")!=null && sessionStorage.getItem("mmauth")!=0 && sessionStorage.getItem("mmauth").slice(0,2)=='us'){
+            var cell7 = row.insertCell(6);
+            cell7.innerHTML = ' <button class="btn btn-secondary" disabled onclick=updateloan('+lead[0]+','+i+','+k+','+idloanmember+')>Save</button>'
+         }
+         else{
+            var cell7 = row.insertCell(6);
+            var bgcolor = "#198754";
+            if(lead[3]==0 && lead[4]==""){
+               bgcolor = "#e63d3d";
+            }
+            else if(lead[3]!=0 && (lead[4]=="" || lead[4]=="0000-00-00" )){
+               bgcolor = "#0e79c8";
+            }
+            else if(lead[3]==0 && (lead[4]!="" || lead[4]!="0000-00-00" )){
+               bgcolor = "#0e79c8";
+            }
+            else{
+               bgcolor = "#198754"
+            }
+            cell7.innerHTML = ' <button class="btn btn-success" style="background-color:'+bgcolor+'" onclick=updateloan('+lead[0]+','+i+','+k+','+idloanmember+')>Save</button>'
+         }         
+        
+       
+      }
+      showTableDiv.insertAdjacentHTML( 'beforeend', endStr );
+      
+}
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const idmember = urlParams.get("idmember");
+      const idnoMM = urlParams.get("idno");
+      document.getElementById("idnoshow").innerHTML = idnoMM;
+      var createMemberArray = [];
+      const name = urlParams.get("name");
+      const idno = urlParams.get("idno");
+      const mobileNumber = urlParams.get("mobileNumber");
+      const groupleaderid = urlParams.get("groupleaderid");
+      var memberTotalIds= [];
+      memberArrayHasValue();
+      
+      function applynow() {
+            var inputtotalamount = document.getElementById("inputtotalamount").value;
+            var inputdueamount = document.getElementById("inputdueamount").value;
+            var inputoccurence = document.getElementById("inputoccurence").value;
+            var inputOccurBy = document.getElementById("inputoccurby").value;
+            var inputdate = document.getElementById("inputdate").value;
+            var issueDate = document.getElementById("issueDate").value;
+            var newRow = document.createElement("div");
+            var inputServiceCharge = document.getElementById('serviceChargeamount').value;
+            fetch("loan.php", {
+            method: "POST",
+            headers: {
+               "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+               "Access-Control-Allow-Origin": "*",
+            },
+            body: `idmember=${idmember}&totalamount=${inputtotalamount}&dueamount=${inputdueamount}&occurence=${inputoccurence}&occurBy=${inputOccurBy}&actualDate=${inputdate}&issueDate=${issueDate}&servicecharge=${inputServiceCharge}`,
+            }).then((response) => {
+            if (response.status === 200) {
+               result = "data received successfully";
+            } else if (response.status === 404) {
+               result = "Requested data not found.";
+            } else {
+               console.log(`Error`);
+            }
+            document.getElementById("inputtotalamount").value = '';
+            document.getElementById("inputdueamount").value = '';
+            document.getElementById("inputoccurence").value = '';
+            document.getElementById("inputoccurby").value = '';
+            document.getElementById("issueDate").value = '';
+            document.getElementById("inputdate").value = '';
+            document.getElementById("serviceChargeamount").value = '';
+            showexistingrecords();
+            });
+      }
+       function loadSavings(){
+         fetch("getSavings.php", {
+         method: "POST",
+         headers: {
+           "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+           "Access-Control-Allow-Origin": "*",
+         },
+         body: `idmember=${idmember}`,
+       }).then((response) => {
+         response.text().then(function (text) {
+           var leaders = text.split(",_,");
+         leaders.pop();
+      
+         var tbody = document
+           .getElementById("savingsBodyId");
+           tbody.innerHTML = '';
+      
+           if(leaders.length<1){
+            document.getElementById("savingDiv").style.display = "none";
+           }
+           if(leaders.length>=1){
+            document.getElementById("savingDiv").style.display = "block";
+           }
+         for (i = 0; i < leaders.length; i++) {
+           var lead = leaders[i].split(",-,");
+           var row = tbody.insertRow();
+      
+           var cell1 = row.insertCell(0);
+           cell1.innerHTML = lead[0];
+      
+           var cell2 = row.insertCell(1);
+           cell2.innerHTML = lead[1];
+
+           var cell3 = row.insertCell(2);
+           cell3.innerHTML ='<button class="btn btn-success" onclick= "generateReport('+lead[2]+')">PRINT</button>';
+         }
+         });
+       });
+       }
+      
+      
+      function saveSavings(){
+      
+       var inputamount = document.getElementById('inputamount').value;
+       var inputsavingdate = document.getElementById('savingDateinput').value;
+       fetch("savings.php", {
+         method: "POST",
+         headers: {
+           "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+           "Access-Control-Allow-Origin": "*",
+         },
+         body: `idmember=${idmember}&amount=${inputamount}&savingdate=${inputsavingdate}`,
+       }).then((response) => {
+         response.text().then(function (text) {
+           var leaders = text.split(",_,");
+         leaders.pop();
+      
+         var tbody = document
+           .getElementById("savingsBodyId");
+           tbody.innerHTML = '';
+      
+         for (i = 0; i < leaders.length; i++) {
+           var lead = leaders[i].split(",-,");
+           var row = tbody.insertRow();
+      
+           var cell1 = row.insertCell(0);
+           cell1.innerHTML = lead[0];
+      
+           var cell2 = row.insertCell(1);
+           cell2.innerHTML = lead[1];
+
+           var cell3 = row.insertCell(2);
+           cell3.innerHTML ='<button class="btn btn-success" onclick= "generateReport('+lead[2]+')">PRINT</button>';
+
+         }
+         });
+         document.getElementById('inputamount').value = "";
+         document.getElementById('savingDateinput').value = "";
+         document.getElementById('savingDiv').style.display="block";
+       });
+      }
+      function generateReport(idsavings){
+         window.open("printsavings.php?idsavings="+idsavings+"&idmember="+idmember);
+    }
+      function showloanpage() {
+         document.getElementById("noLoansYet").style.display = "none";
+         document.getElementById("loantabs").style.display = "flex";
+         document.getElementById("savingsform").style.display = "none";
+         document.getElementById("applynowtable").style.display = "none";
+         document.getElementById("summary") ? document.getElementById("summary").style.display="none":'';
+         document.getElementById("loan").style.backgroundColor = "#F58F7C";
+         document.getElementById("savings").style.backgroundColor = " #4F4F51";
+         document.getElementById("memberloan").style.backgroundColor = " #4F4F51";
+         document.getElementById("updateSwitch").style.display="none";   
+         showexistingrecords();
+      }
+      function showsavingspage() {
+         document.getElementById("noLoansYet").style.display = "none";
+         document.getElementById("loantabs").style.display = "none";
+         document.getElementById("savingsform").style.display = "flex";
+         document.getElementById("completetable").style.display = "none";
+         changeExistingTableDisplay("none");
+         document.getElementById("applymembertableform").style.display = "none"; 
+         document.getElementById("updateMemberTableForm").style.display = "none";          
+         document.getElementById("applytableform").style.display = "none";
+         document.getElementById("applynowtable").style.display = "none";
+         document.getElementById("summary") ? document.getElementById("summary").style.display="none":'';
+         document.getElementById("loan").style.backgroundColor = " #4F4F51";
+         document.getElementById("savings").style.backgroundColor = "#F58F7C";
+         document.getElementById("memberloan").style.backgroundColor = " #4F4F51";
+         document.getElementById("showtableshere").style.display="none";
+         document.getElementById("updateSwitch").style.display="none";   
+         loadSavings();
+      }
+      window.onload = () => {
+         if(sessionStorage.getItem("mmauth")==null || sessionStorage.getItem("mmauth")==0 ){
+            window.location.href="index.html";
+            return;
+         }
+         
+       document.getElementById("completetable").style.display = "none";
+       changeExistingTableDisplay("none");
+       document.getElementById("applytableform").style.display = "none";
+       document.getElementById("applynowtable").style.display = "none";
+       
+       checkGroupLeaderIsLanding();
+       showloanpage();
+      //  showexistingrecords();
+      };
+
+      function changeExistingTableDisplay(displayType){ 
+         var elems = document.querySelectorAll('[id^=existingtable]');
+         var index = 0, length = elems.length;
+         for ( ; index < length; index++) {
+            elems[index].style.display = displayType;
+         }
+         document.getElementById("summary") ? document.getElementById("summary").style.display=displayType:'';
+      }
+
+      function logoutUser(){
+         sessionStorage.clear();
+         window.location.href= "index.html";
+      }
+      
+      function showcompleterecords() {
+         document.getElementById("noLoansYet").style.display = "none";
+         document.getElementById("showtableshere").style.display = "flex";
+         document.getElementById("completetable").style.display = "block";
+         changeExistingTableDisplay("none");
+         document.getElementById("applymembertableform").style.display = "none";
+         document.getElementById("updateMemberTableForm").style.display = "none";    
+         document.getElementById("applytableform").style.display = "none";
+         document.getElementById("applynowtable").style.display = "none";
+         document.getElementById("complete").style.backgroundColor=" #4F4F51";
+         document.getElementById("existing").style.backgroundColor="#F58F7C";
+         document.getElementById("applynew").style.backgroundColor="#F58F7C";
+         document.getElementById("complete").style.color="white";
+         document.getElementById("existing").style.color="black";
+         document.getElementById("applynew").style.color="black";
+         renderTable(idmember,1,'completed');
+      }
+      function showexistingrecords() {
+         document.getElementById("noLoansYet").style.display = "none";
+         document.getElementById("showtableshere").style.display = "flex";
+         document.getElementById("completetable").style.display = "none";
+         changeExistingTableDisplay("flex");
+         document.getElementById("applymembertableform").style.display = "none";
+         document.getElementById("updateMemberTableForm").style.display = "none";    
+         document.getElementById("applytableform").style.display = "none";
+         document.getElementById("applynowtable").style.display = "none";
+         document.getElementById("complete").style.backgroundColor="#F58F7C";
+         document.getElementById("existing").style.backgroundColor=" #4F4F51";
+         document.getElementById("applynew").style.backgroundColor="#F58F7C";
+         document.getElementById("complete").style.color="black";
+         document.getElementById("existing").style.color="white";
+         document.getElementById("applynew").style.color="black";
+         renderTable(idmember,0,'existing');
+      }
+      function showapplyrecords() {
+         document.getElementById("noLoansYet").style.display = "none";
+         document.getElementById("showtableshere").style.display = "none";
+       document.getElementById("completetable").style.display = "none";
+       changeExistingTableDisplay("none");
+       document.getElementById("applymembertableform").style.display = "none";
+       document.getElementById("updateMemberTableForm").style.display = "none";    
+       document.getElementById("applytableform").style.display = "flex";
+       document.getElementById("applynowtable").style.display = "none";
+       document.getElementById("complete").style.backgroundColor="#F58F7C";
+       document.getElementById("existing").style.backgroundColor="#F58F7C";
+       document.getElementById("applynew").style.backgroundColor=" #4F4F51"; 
+       document.getElementById("complete").style.color="black";
+       document.getElementById("existing").style.color="black";
+       document.getElementById("applynew").style.color="white";
+      }
+      function showapplymemberrecords() {
+
+         document.getElementById("noLoansYet").style.display = "none";
+         document.getElementById("loantabs").style.display = "none";
+         document.getElementById("savingsform").style.display = "none";
+         document.getElementById("completetable").style.display = "none";
+         changeExistingTableDisplay("none");
+         document.getElementById("applymembertableform").style.display = "flex";
+         document.getElementById("updateMemberTableForm").style.display = "none";    
+         document.getElementById("applytableform").style.display = "none";
+         document.getElementById("applynowtable").style.display = "flex";
+         document.getElementById("summary") ? document.getElementById("summary").style.display="none":'';
+         document.getElementById("loan").style.backgroundColor = " #4F4F51";
+         document.getElementById("savings").style.backgroundColor =" #4F4F51";
+         document.getElementById("memberloan").style.backgroundColor ="#F58F7C";
+         document.getElementById("showtableshere").style.display="none";
+         document.getElementById("updateSwitch").style.display="block";  
+         document.getElementById("isUpdateClicked").checked=false;   
+         document.getElementById("selectAllCheck").checked=false;   
+         createMemberArray = [];
+         getMembersByGroupleaderId();
+      }
+      function checkGroupLeaderIsLanding() {
+         const urlParams = new URLSearchParams(window.location.search);
+         const groupleaderid = urlParams.get("groupleaderid");
+         if (groupleaderid) {
+                  document.getElementById("memberloan").style.display = "block"; document.getElementById("noLoansYet").style.display = "none";
+                  document.getElementById("applymembertableform").style.display = "none";
+                  document.getElementById("updateMemberTableForm").style.display = "none";    
+                  document.getElementById("savingsform").style.display = "none";
+                  document.getElementById("completetable").style.display = "none";
+                  changeExistingTableDisplay("none");  
+                  document.getElementById("applytableform").style.display = "none";
+                  document.getElementById("applynowtable").style.display = "none";
+                  document.getElementById("summary") ? document.getElementById("summary").style.display="none":'';
+                  document.getElementById("showtableshere").style.display="none";
+
+         } else {
+                  document.getElementById("memberloan").style.display = "none";
+                  document.getElementById("noLoansYet").style.display = "none";
+                  document.getElementById("applymembertableform").style.display = "none";
+                  document.getElementById("updateMemberTableForm").style.display = "none";    
+                  document.getElementById("savingsform").style.display = "none";
+                  document.getElementById("completetable").style.display = "none";
+                  changeExistingTableDisplay("none");  
+                  document.getElementById("applytableform").style.display = "none";
+                  document.getElementById("applynowtable").style.display = "none";
+                  document.getElementById("summary") ? document.getElementById("summary").style.display="none":'';
+                  document.getElementById("showtableshere").style.display="none";
+            
+         }
+      };
+      
+      function getMembersByGroupleaderId(){
+         
+         fetch("memberloan.php?groupleader="+groupleaderid, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+          "Access-Control-Allow-Origin": "*",
+        },
+      }).then((response) => {
+        response.text().then(function (text) {
+          var leaders = text.split(",_,");
+          leaders.pop();
+
+          var tableNew = document.getElementById('myTable');
+          tableNew.removeChild(tableNew.getElementsByTagName("tbody")[0]);
+          tableNew.appendChild(document.createElement('tbody'));
+          var tbody = tableNew.getElementsByTagName("tbody")[0];
+        
+          for (i = 0; i < leaders.length; i++) {
+            var lead = leaders[i].split(",-,");
+            var row = tbody.insertRow();
+            row.setAttribute("id","row_"+i);
+            // update all ids
+            memberTotalIds.push(lead[0]);
+            var cell1 = row.insertCell(0);
+            cell1.innerHTML =
+            '<span>'+(i+1)+'&nbsp;&nbsp;&nbsp;</span><input class="form-check-input" type="checkbox" value="" id="memberloancheck_'+i+'" onclick="addMemberArray('+i+','+lead[0]+')">';
+
+            var cell2 = row.insertCell(1);
+            cell2.innerHTML = lead[1];
+
+            var cell3 = row.insertCell(2);
+            cell3.innerHTML = lead[2];
+
+            var cell4 = row.insertCell(3);
+            cell4.innerHTML = lead[3];
+
+            var cell5 = row.insertCell(4);
+            cell5.innerHTML = lead[4];
+
+          }
+        });
+      });
+      }
+      function addMemberArray(itr,idmember){
+         let memberloanid = document.getElementById('memberloancheck_'+itr);
+         if (memberloanid.checked) {
+            createMemberArray.push(idmember);
+            console.log("elements "+createMemberArray);
+            memberArrayHasValue();
+         } else {
+            const indexLocation = createMemberArray.indexOf(idmember);
+            createMemberArray.splice(indexLocation,1);
+            console.log("elements "+createMemberArray);
+            memberArrayHasValue();
+         }
+      }
+      function applyBulknow() {
+         
+            var inputtotalamountbulk = document.getElementById("inputtotalamountbulk").value;
+            var inputdueamountbulk = document.getElementById("inputdueamountbulk").value;
+            var inputoccurencebulk = document.getElementById("inputoccurencebulk").value;
+            var inputOccurBybulk = document.getElementById("inputoccurbybulk").value;
+            var inputdatebulk = document.getElementById("inputdatebulk").value;
+            var issueDatebulk = document.getElementById("issueDatebulk").value;
+            var serviceCharegeBulk = document.getElementById("serviceChargeamountbulk").value;
+            
+            fetch("loanbulk.php", {
+               method: "POST",
+               headers: {
+               "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+               "Access-Control-Allow-Origin": "*",
+               },
+               body: `totalamount=${inputtotalamountbulk}&dueamount=${inputdueamountbulk}&occurence=${inputoccurencebulk}&occurBy=${inputOccurBybulk}&actualDate=${inputdatebulk}&serviceCharge=${serviceCharegeBulk}&issueDate=${issueDatebulk}&members=${createMemberArray}`,
+            }).then((response) => {
+               if (response.status === 200) {
+               result = "data received successfully";
+               } else if (response.status === 404) {
+               result = "Requested data not found.";
+               } else {
+               console.log(`Error`);
+               }
+               document.getElementById("inputtotalamountbulk").value = '';
+               document.getElementById("inputdueamountbulk").value = '';
+               document.getElementById("inputoccurencebulk").value = '';
+               document.getElementById("inputoccurbybulk").value = '';
+               document.getElementById("inputdatebulk").value = '';
+               document.getElementById("issueDatebulk").value = '';
+               document.getElementById("serviceChargeamountbulk").value = '';               
+               showexistingrecords();
+            });       
+      }
+   </script>
+</html>

@@ -1,0 +1,259 @@
+<html>
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+      <!-- Bootstrap CSS -->
+      <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+        crossorigin="anonymous"
+      />
+    </head>
+    <style>
+      body {
+        background: #F58F7C;
+        font-family: system-ui;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(
+        to bottom, 
+         #4F4F51,
+         #4F4F51 18%,
+        black 1%,
+        black 5%,
+        #F58F7C 19%,
+        #F58F7C
+        );
+      }
+      .display {
+        background-color: white;
+        height: 60%;
+        width: 90%;
+        border-radius: 6px;
+        padding: 5px;
+        box-shadow: 0 5px 10px black;
+      }
+
+      .tab {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        box-shadow: 0 5px 10px #F58F7C;
+      }
+
+      /* Style the buttons that are used to open the tab content */
+      .tab button {
+        color: white;
+        background-color: #4f4f51;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+      }
+
+      /* Change background color of buttons on hover */
+      .tab button:hover {
+        background-color: #F58F7C;
+      }
+      #collapse1 {
+        overflow-y: scroll;
+        overflow-x: scroll;
+        height: 200px;
+      }
+      thead tr th {
+        position: sticky;
+        top: 120;
+      }
+      .title{
+        position: sticky;
+        top: 0;
+      }
+      tbody{
+        border-spacing: 10px; /* Adjust the desired vertical spacing */
+      }
+      tbody td {
+        height: 50px; /* Adjust the desired height */
+      }
+
+      thead th {
+        width: 25%; /* Adjust the desired width */
+        font-size: 25px;
+        margin:1%;
+      }
+      tbody td:nth-child(2) {
+        font-size: 20px;
+        font-weight: bold;
+      }
+      thead th#avatar,
+      tbody td:nth-child(1) {
+        text-align: center;
+      }
+        table {
+        border-collapse: separate;
+        border-spacing: 0 15px;
+      }
+      th,
+      td {
+        width: 150px;
+        text-align: center;
+        
+        padding: 5px;
+      }
+    </style>
+    <body>
+            </div>
+          </div>
+        </div>
+        <div
+          id="collapse1"
+          style="
+            height: 90%;
+            width: 90%;
+            border-radius: 10px;
+            box-shadow: 0 5px 10px black;
+            background-color: #dee2e6;
+           display: flex;
+           flex-direction: column;
+           align-items: flex-end;
+          "
+        >
+        
+        <div
+          class="form-group title "
+          style="display: flex;justify-content: space-between;width:100%;background-color: white;align-items: center;"
+        >
+        <img
+        src="logo.png"
+        style="height: 100px;
+        width: 200px;
+        border-radius: 5px;
+        margin: 2%;"
+      />
+          <input
+            type="text"
+            class="form-control"
+            id="searchinput"
+            placeholder="Search by / Name. / Member Id. / Aadhar No. / Mobile No."
+            style="margin: 4%;
+            width: 70%;
+            height: 30%;
+        "
+            onchange="searchEnabled()"
+          />
+          <button type="submit"
+                        class="btn btn-primary mb-2"
+                        style="
+                        margin: 5px; height: 50px !important;
+                        background-color: #4F4F51;
+                        border: 2px solid #F58F7C;
+                        color: white;width: 10%;
+                        " onclick="window.location.href='main.html'"><i class="fa fa-sign-out"></i> Home</button>
+          </div>
+          <table class="table table-light table-hover" id="myTable">
+            <thead>
+              <tr>
+                <th scope="col" id="avatar">Profile</th>
+                <th scope="col" id="name">Name</th>
+                <th scope="col" id="idno">Idno</th>
+                <th scope="col" id="mobilenumber">Mobilenumber</th>
+                <th scope="col" id="groupleader">Groupleader</th>
+                <th scope="col" id="groupleader">Delete</th>
+                </th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </body>
+
+    <script>
+      function redirectLoan(groupleaderid,idnoMM,idmember){
+  
+window.location.href = "loan.html?groupleaderid="+groupleaderid+"&idno="+idnoMM+"&idmember="+idmember;
+
+}
+      // Add event listener to the table's tbody element
+document.querySelector("#myTable tbody").addEventListener("click", function(event) {
+  // Check if the clicked element is a delete button
+  if (event.target.classList.contains("btn-danger")) {
+    // Get the index of the clicked row
+    var rowIndex = event.target.closest("tr").rowIndex;
+    // Remove the row from the table
+    document.querySelector("#myTable").deleteRow(rowIndex);
+  }
+});
+      
+      fetch("groupleader.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+          "Access-Control-Allow-Origin": "*",
+        },
+      }).then((response) => {
+        response.text().then(function (text) {
+          var leaders = text.split(",_,");
+          leaders.pop();
+
+          var tbody = document
+            .getElementById("myTable")
+            .getElementsByTagName("tbody")[0];
+
+          for (i = 0; i < leaders.length; i++) {
+            var lead = leaders[i].split(",-,");
+            var row = tbody.insertRow();
+            row.setAttribute("id","row_"+i);
+
+            row.setAttribute("onclick","redirectLoan("+lead[0]+",'"+lead[2]+"',"+lead[0]+")");
+            var cell1 = row.insertCell(0);
+            cell1.innerHTML =
+              '<img src="avatar.png" style="height: 40px; width: 40px; border-radius: 50%;">';
+
+            var cell2 = row.insertCell(1);
+            cell2.innerHTML = lead[1];
+
+            var cell3 = row.insertCell(2);
+            cell3.innerHTML = lead[2];
+
+            var cell4 = row.insertCell(3);
+            cell4.innerHTML = lead[3];
+
+            var cell5 = row.insertCell(4);
+            cell5.innerHTML = lead[4];
+
+            var cell6 = row.insertCell(5);
+            cell6.innerHTML = ' <button class="btn btn-danger" >DELETE</button>'
+          }
+        });
+      });
+      const searchInput = document.getElementById("searchinput");
+      const dataTable = document.getElementById("myTable");
+      const tableRows = dataTable.getElementsByTagName("tr");
+
+      searchInput.addEventListener("input", function () {
+        const searchQuery = searchInput.value.toLowerCase().trim();
+
+        for (let i = 1; i < tableRows.length; i++) {
+          const rowData = tableRows[i].getElementsByTagName("td");
+          let foundMatch = false;
+
+          for (let j = 0; j < rowData.length; j++) {
+            const cellData = rowData[j].textContent.toLowerCase();
+
+            if (cellData.includes(searchQuery)) {
+              foundMatch = true;
+              break;
+            }
+          }
+
+          tableRows[i].style.display = foundMatch ? "" : "none";
+        }
+      });
+    </script>
+  </html>
+</html>

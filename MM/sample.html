@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JavaScript Table with Data from MySQL Database</title>
+  </head>
+  <body>
+    <table id="myTable">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <script>
+      const tableData = []; // assume you have retrieved the data from the server and stored it in an array
+
+      // create table element
+      const table = document.createElement("table");
+      table.classList.add("table", "table-light", "table-hover");
+
+      // create table header row
+      const tableHeader = table.createTHead();
+      const headerRow = tableHeader.insertRow();
+      const headerNames = ["Name", "ID"];
+
+      for (let i = 0; i < headerNames.length; i++) {
+        const headerCell = headerRow.insertCell(i);
+        headerCell.innerHTML = headerNames[i];
+      }
+
+      // create table body rows and cells
+      const tableBody = table.createTBody();
+      for (let i = 0; i < tableData.length; i++) {
+        const row = tableBody.insertRow();
+        const rowData = tableData[i];
+        for (let j = 0; j < rowData.length; j++) {
+          const cell = row.insertCell(j);
+          cell.innerHTML = rowData[j];
+        }
+      }
+
+      // add table to the HTML document
+      document.body.appendChild(table);
+    </script>
+  </body>
+</html>

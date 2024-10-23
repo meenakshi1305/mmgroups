@@ -1,0 +1,1222 @@
+<html>
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>Member</title>
+      <link rel="icon" type="image/x-icon" href="logo.png" />
+      <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+        crossorigin="anonymous"
+      />
+      <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    </head>
+    <style>
+      body {
+        background: #F58F7C;
+        font-family: system-ui;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(
+          to bottom,
+           #4F4F51,
+           #4F4F51 18%,
+          black 1%,
+          black 5%,
+          #F58F7C 19%,
+          #F58F7C
+        );
+      }
+      .row {
+        background-color: white;
+        height: auto;
+        width: 90%;
+        border-radius: 6px;
+        padding: 5px;
+        box-shadow: 0 5px 10px black;
+      }
+      .btn {
+        text-decoration: none;
+        text-align: center;
+        width: auto;
+      }
+      .loader {
+        border: 7px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 7px solid #3498db;
+        width: 45px;
+        height: 45px;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+        animation: spin 2s linear infinite;
+      }
+
+      /* Safari */
+      @-webkit-keyframes spin {
+        0% {
+          -webkit-transform: rotate(0deg);
+        }
+        100% {
+          -webkit-transform: rotate(360deg);
+        }
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      #snackbar {
+        visibility: hidden; /* Hidden by default. Visible on click */
+        min-width: 250px; /* Set a default minimum width */
+        margin-left: -125px; /* Divide value of min-width by 2 */
+        background-color: green; /* Black background color */
+        color: #fff; /* White text color */
+        text-align: center; /* Centered text */
+        border-radius: 2px; /* Rounded borders */
+        padding: 16px; /* Padding */
+        position: fixed; /* Sit on top of the screen */
+        z-index: 1; /* Add a z-index if needed */
+        left: 50%; /* Center the snackbar */
+        bottom: 30px; /* 30px from the bottom */
+      }
+
+      /* Show the snackbar when clicking on a button (class added with JavaScript) */
+      #snackbar.show {
+        visibility: visible; /* Show the snackbar */
+        /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+              However, delay the fade out process for 2.5 seconds */
+        -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        animation: fadein 0.5s, fadeout 0.5s 2.5s;
+      }
+
+      /* Animations to fade the snackbar in and out */
+      @-webkit-keyframes fadein {
+        from {
+          bottom: 0;
+          opacity: 0;
+        }
+        to {
+          bottom: 30px;
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadein {
+        from {
+          bottom: 0;
+          opacity: 0;
+        }
+        to {
+          bottom: 30px;
+          opacity: 1;
+        }
+      }
+
+      @-webkit-keyframes fadeout {
+        from {
+          bottom: 30px;
+          opacity: 1;
+        }
+        to {
+          bottom: 0;
+          opacity: 0;
+        }
+      }
+
+      @keyframes fadeout {
+        from {
+          bottom: 30px;
+          opacity: 1;
+        }
+        to {
+          bottom: 0;
+          opacity: 0;
+        }
+      }
+      .tab {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        box-shadow: 0 5px 10px #F58F7C;
+      }
+
+      /* Style the buttons that are used to open the tab content */
+      .tab button {
+        color: white;
+        background-color:  #4F4F51;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+      }
+
+      /* Change background color of buttons on hover */
+      .tab button:hover {
+        background-color: #F58F7C;
+      }
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+      }
+
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: 0.4s;
+        transition: 0.4s;
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: 0.4s;
+        transition: 0.4s;
+      }
+
+      input:checked + .slider {
+        background-color:  #4F4F51;
+      }
+
+      input:focus + .slider {
+        box-shadow: 0 0 1px  #4F4F51;
+      }
+
+      input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+      }
+
+      /* Rounded sliders */
+      .slider.round {
+        border-radius: 34px;
+      }
+
+      .slider.round:before {
+        border-radius: 50%;
+      }
+      input[type="date"]::-webkit-calendar-picker-indicator {
+        color: #436d43;
+      }
+      label {
+        display: block;
+        font: 1rem "Fira Sans", sans-serif;
+      }
+
+      input,
+      label {
+        margin: 0.4rem 0;
+      }
+
+      .dropbtn {
+        background-color: #F58F7C;
+        color:  #4F4F51;
+        border: 1px solid  #4F4F51;
+        color: white;
+        padding: 5px;
+        font-size: 13px;
+        border: none;
+        cursor: pointer;
+      }
+
+      .dropbtn:hover,
+      .dropbtn:focus {
+        background-color: #3e8e41;
+      }
+
+      #myInput {
+        box-sizing: border-box;
+        background-image: url("searchicon.png");
+        background-position: 14px 12px;
+        background-repeat: no-repeat;
+        font-size: 13px;
+        padding: 5px 10px 5px 10px;
+        border: none;
+        border-bottom: 1px solid #ddd;
+      }
+
+      #myInput:focus {
+        outline: 3px solid #ddd;
+      }
+
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f6f6f6;
+        min-width: 170px;
+        overflow-y: scroll;
+        border: 1px solid #ddd;
+        z-index: 1;
+        max-height: 150px;
+      }
+
+      .dropdown-content a {
+        color: black;
+        padding: 5px 10px;
+        text-decoration: none;
+        display: block;
+        font-size: 13px;
+      }
+
+      .file_upload {
+        opacity: 0;
+
+        /* IE 8 */
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+
+        /* IE 5-7 */
+        filter: alpha(opacity=0);
+
+        /* Netscape or and older firefox browsers */
+        -moz-opacity: 0;
+
+        /* older Safari browsers */
+        -khtml-opacity: 0;
+
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .dropdown a:hover {
+        background-color: #ddd;
+      }
+
+      .show {
+        display: block;
+      }
+    </style>
+    <body>
+      <div
+        style="
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          height: 100%;
+          width: 100%;
+          align-items: center;
+        "
+      >
+        <div
+          style="
+            height: 20%;
+            width: 100%;
+            justify-content: space-between;
+            display: flex;
+            flex-direction: column;
+          "
+        >
+          <div class="logo" style="height: 10%; width: 100%; padding: 10px">
+            <div
+              style="
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+              "
+            >
+              <div style="width: 30%">
+                <img
+                  src="logo.png"
+                  style="height: 60%; width: 50%; border-radius: 5px"
+                />
+              </div>
+              <div style="width: 70%">
+                <div
+                  class="form-group mx-sm-3 mb-2"
+                  style="display: flex; flex-direction: row"
+                >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="searchinput"
+                    placeholder="Search by Member Id. / Aadhar No. / Mobile No."
+                    style="margin: 5px"
+                    onchange="searchEnabled()"
+                  />
+                  <button
+                    type="submit"
+                    class="btn btn-primary mb-2"
+                    style="
+                      margin: 5px;
+                      background-color:  #4F4F51;
+                      border: 2px solid #F58F7C;
+                      color: white;
+                    "
+                    onclick="searchMember()"
+                  >
+                    Search
+                  </button>
+                  <button type="submit"
+                        class="btn btn-primary mb-2"
+                        style="
+                        margin: 5px;
+                        background-color:  #4F4F51;
+                        border: 2px solid #F58F7C;
+                        color: white;width: 10%;
+                        " onclick="window.location.href='main.html'"><i class="fa fa-sign-out"></i> Home</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab">
+            <button
+              class="tablinks"
+              id="btnmemberdetails"
+              style="
+                width: 50%;
+                border: 1px solid #F58F7C;
+                font-weight: bold;
+                border-radius: 10px;
+              "
+              onclick="showMemberDetails()"
+            >
+              Member Details
+            </button>
+            <!-- <button
+              class="tablinks"
+              id="btnpaymenthistory"
+              style="
+                width: 50%;
+                border: 1px solid #F58F7C;
+                font-weight: bold;
+                border-radius: 10px;
+              "
+              onclick="showpaymenthistory()"
+            >
+              Payment History
+            </button> -->
+          </div>
+        </div>
+        <div
+          style="
+            height: 80%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          "
+        >
+          <div class="row" id="addmember">
+            <div class="title">
+              <h1 id="addmemberInput" style="border-radius: 5px">ADD MEMBER</h1>
+              <h1 id="memberIdLabel" style="border-radius: 5px"></h1>
+            </div>
+            <div
+              style="
+                background-color: #989292;
+                width: 150px;
+                height: 150px;
+                margin: 20px;
+                border-radius: 10px;
+                border: 1px dashed black;
+                cursor: pointer;
+                position: relative;
+                line-height: 30px;
+                text-align: center;
+              "
+            >
+              <img
+                alt="Select Avatar"
+                style="width: 125px; height: 150px"
+                id="avatarimg"
+              />
+              <input
+                type="file"
+                class="file_upload"
+                style="cursor: pointer"
+                accept="image/*"
+                id="avatarFile"
+                onchange="readURL(this);"
+              />
+              <label for="mobileno" class="form-label">Date of joining</label>
+              <input
+                class="form-control"
+                type="date"
+                id="dateofjoin"
+                name="actualDate"
+                style="margin: 1%"
+              />
+            </div>
+
+            <div class="col-md-4">
+              <label for="name" class="form-label">Name</label>
+              <input
+                type="text"
+                class="form-control"
+                name="name"
+                style="box-shadow: 0 2px 3px grey; margin: 5px"
+                id="inputName"
+                placeholder="eg: Mr. Muthuraman"
+                required
+              />
+              <label for="aadharno" class="form-label">Aadhar no</label>
+              <input
+                type="number"
+                class="form-control"
+                name="aadharno"
+                style="box-shadow: 0 2px 3px grey; margin: 5px"
+                id="inputAadharno"
+                placeholder="eg: 1234-1234-1234"
+
+                required
+              />
+              <span id="aadharError" style="color: red; display: none"
+                >* This field is required and it should contain only 12
+                characters</span
+              >
+              <label for="nomineename" class="form-label">Nominee Name</label>
+              <input
+                type="text"
+                class="form-control"
+                name="nomineename"
+                style="box-shadow: 0 2px 3px grey; margin: 5px"
+                id="inputnomineename"
+                placeholder="eg: Mr. Muthuraman"
+                required
+              />
+            </div>
+
+            <div class="col-md-4">
+              <label for="mobileno" class="form-label">Mobile Number</label>
+              <input
+                type="number"
+                class="form-control"
+                name="mobileno"
+                style="box-shadow: 0 2px 3px grey; margin: 5px"
+                id="inputMobile"
+                placeholder="eg: 98765-43210"
+                required
+              />
+              <span id="mobileError" style="color: red; display: none"
+                >* This field is required and it should contain only 10
+                characters</span
+              >
+              <label for="password" class="form-label">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                name="password"
+                style="box-shadow: 0 2px 3px grey; margin: 5px"
+                id="inputPassword"
+                placeholder="eg: 4-8 alphanumeric characters"
+                required
+              />
+              <label for="nomineeaadharno" class="form-label">Nominee Aadhar no</label>
+              <input
+                type="number"
+                class="form-control"
+                name="aadharno"
+                style="box-shadow: 0 2px 3px grey; margin: 5px"
+                id="inputNomineeAadharno"
+                placeholder="eg: 1234-1234-1234"
+                required
+              />
+              <span id="nomineeaadharError" style="color: red; display: none"
+                >* This field is required and it should contain only 12
+                characters</span
+              >
+              
+            </div>
+            <div class="flex-md-row d-flex flex-sm-column flex-column">
+              <div
+                id="choosefile"
+                class="col-md-4"
+                style="display: flex; flex-direction: row; margin-top: 25px"
+              >
+                <div style="width: 100% !important">
+                  <input
+                    class="form-control"
+                    type="file"
+                    id="document"
+                    accept="image/*"
+                    onchange="showFileNames(event)"
+                    title="documents"
+                    name="userImage[]"
+                    multiple
+                  />
+                  <a id="filename"></a>
+                </div>
+              </div>
+              <div class="col-md-7">
+                <label for="address" class="form-label">Address</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="address"
+                  style="box-shadow: 0 2px 3px grey; margin: 5px"
+                  id="inputAddress"
+                  placeholder="eg: "
+                  required
+                />
+                <label for="bankdetails" class="form-label">Bank Details</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="bankdetails"
+                  style="box-shadow: 0 2px 3px grey; margin: 5px"
+                  id="inputBankdetails"
+                  placeholder="eg: Bank name, Account number, Branch name, Branch city, IFSC code"
+                  required
+                />
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-evenly;
+                  "
+                >
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    name="groupleader"
+                    id="inputisgroupleader"
+                    onclick="showdropdown()"
+                    style="border: 2px solid green"
+                  />
+                  <label
+                    class="form-check-label"
+                    for="flexCheckChecked"
+                    style="padding-left: 5px"
+                  >
+                    make
+                  </label>
+                  <label style="font-weight: bold" id="leaderName"></label>
+                  <div class="dropdown" id="iddropdown">
+                    <button onclick="myFunction()" class="dropbtn">
+                      Leaders
+                    </button>
+                    <div id="myDropdown" class="dropdown-content">
+                      <input
+                        type="text"
+                        placeholder="Search.."
+                        id="myInput"
+                        onkeyup="filterFunction()"
+                      />
+                    </div>
+                  </div>
+                  <label
+                    class="form-check-label"
+                    for="flexCheckChecked"
+                    style="padding-left: 5px"
+                  >
+                    as group leader
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div
+              class="col-md-12"
+              style="
+                margin: 2%;
+                display: flex;
+                justify-content: center;
+                border-radius: 5px;
+              "
+            >
+              <button
+                type="submit"
+                id="submitBtn"
+                onclick=" submitbutton()"
+                class="btn btn-info"
+                style="
+                  background-color:  #4F4F51;
+                  border: 2px solid #F58F7C;
+                  color: white;
+                  width: auto;
+                  margin: 5px;
+                "
+                name="submit"
+              >
+                Submit
+              </button>
+              <div class="loader" id="loaderid" style="display: none"></div>
+              <button
+                type="submit"
+                id="updatebtn"
+                onclick=" updateProfile()"
+                class="btn btn-info"
+                style="
+                  background-color:  #4F4F51;
+                  border: 2px solid #F58F7C;
+                  color: white;
+                  width: auto;
+                  margin: 5px;
+                "
+                name="updatebtn"
+              >
+                Update
+              </button>
+              <button
+                type="submit"
+                id="printpdf"
+                onclick=" download()"
+                class="btn btn-info"
+                style="
+                  background-color:  #4F4F51;
+                  border: 2px solid #F58F7C;
+                  color: white;
+                  width: auto;
+                  margin: 5px;
+                "
+                name="printpdf"
+              >
+                Print PDF
+              </button>
+              <div id="snackbar"></div>
+              <input
+                type="number"
+                style="display: none"
+                id="invisiblememberid"
+              /> 
+              <input
+                type="number"
+                hidden
+                id="invisiblegroupleaderid"
+                name="groupleaderid"
+              />
+            </div>
+          </div>
+          <div id="paymenthistory" style="width: 90%; height: 90%">
+            <div style="display: flex; justify-content: space-around">
+              <input
+                name="payamount"
+                type="number"
+                class="form-control"
+                id="paymentinput"
+                placeholder="amount"
+                style="width: 50%"
+              />
+              <label>Delayed date</label>
+              <input type="date" id="date" name="date" />
+              <button
+                type="submit"
+                class="btn btn-primary mb-2"
+                style="
+                  margin: 5px;
+                  background-color:  #4F4F51;
+                  border: 2px solid #F58F7C;
+                  color: white;
+                "
+                onclick="savepaymenthistory()"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </body>
+    <script>
+
+      function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+      }
+
+      function download() {
+        var memberid = document.getElementById("invisiblememberid").value;
+        window.open("download.php?idmember=" + memberid, "_blank");
+      }
+
+      function updateProfile() {
+        document.getElementById("printpdf").style.display = "none";
+        document.getElementById("updatebtn").style.display = "none";
+        document.getElementById("loaderid").style.display = "block";
+        var memberid = document.getElementById("invisiblememberid").value;
+        var inputName = document.getElementById("inputName").value;
+        var inputAadharno = document.getElementById("inputAadharno").value;
+        var inputnomineename = document.getElementById("inputnomineename").value;
+        var inputNomineeAadharno = document.getElementById("inputNomineeAadharno").value;
+        var inputDoj = document.getElementById("dateofjoin").value;
+        if (
+          inputAadharno.length > 12 ||
+          inputAadharno.length < 12 ||
+          inputAadharno == ""
+        ) {
+          document.getElementById("aadharError").style.display = "block";
+        }
+        if (
+          inputAadharno.length > 12 ||
+          inputAadharno.length < 12 ||
+          inputAadharno == ""
+        ) {
+          document.getElementById("nomineeaadharError").style.display = "block";
+        }
+        var inputMobile = document.getElementById("inputMobile").value;
+        if (
+          inputMobile.length > 10 ||
+          inputMobile.length < 10 ||
+          inputMobile == ""
+        ) {
+          document.getElementById("mobileError").style.display = "block";
+        }
+        if (inputAadharno.length === 12 && inputMobile.length === 10) {
+          var inputPassword = document.getElementById("inputPassword").value;
+          var inputAddress = document.getElementById("inputAddress").value;
+          var inputBankdetails =
+            document.getElementById("inputBankdetails").value;
+          var isgroupleader =
+            document.getElementById("inputisgroupleader").checked;
+          var inputisgroupleader = isgroupleader ? 1 : 0;
+          var idno = "M_" + inputMobile;
+          var result;
+          var invisiblegroupleaderid = document.getElementById(
+            "invisiblegroupleaderid"
+          ).value;
+          fetch("updatemember.php", {
+            method: "POST",
+            headers: {
+              "Content-Type":
+                "application/x-www-form-urlencoded; charset=UTF-8",
+              "Access-Control-Allow-Origin": "*",
+            },
+            body: `idmember=${memberid}&name=${inputName}&aadharno=${inputAadharno}&nomineename=${inputnomineename}&nomineeaadharno=${inputNomineeAadharno}&mobilenumber=${inputMobile}&address=${inputAddress}&bankdetails=${inputBankdetails}&groupleader=${inputisgroupleader}&groupleaderid=${invisiblegroupleaderid}&doj=${inputDoj}`,
+          }).then((response) => {
+            if (response.status === 200) {
+              result = "data received successfully";
+            } else if (response.status === 404) {
+              result = "Requested data not found.";
+            } else if (response.status === 400) {
+              result = "not a correct syntax.";
+            } else if (response.status === 409) {
+              result = "Requested data not found.";
+            } else {
+              console.log(`Error:`);
+            }
+            document.getElementById("submitBtn").style.display = "none";
+            document.getElementById("aadharError").style.display = "none";
+            document.getElementById("nomineeaadharError").style.display = "none";
+            document.getElementById("mobileError").style.display = "none";
+            document.getElementById("loaderid").style.display = "block";
+            response.text().then(function (text) {
+              var inputFiles = document.getElementById("document");
+              if (inputFiles.files.length > 0) {
+                const files = inputFiles.files;
+                for (let i = 0; i < files.length; i++) {
+                  let file = files.item(i);
+                  const form_data = new FormData();
+                  form_data.append("userImage", file);
+                  form_data.append("idmember", memberid);
+                  form_data.append("filename", file.name);
+                  form_data.append("isavatar", 0);
+                  fetch("memberdocument.php", {
+                    method: "POST",
+                    body: form_data,
+                  }).then((response) => {
+                    document.getElementById("document").value = "";
+                  });
+                }
+              }
+              var avatarfiles = document.getElementById("avatarFile");
+              if (avatarfiles.files.length > 0) {
+                const files = avatarfiles.files;
+                for (let i = 0; i < files.length; i++) {
+                  let file = files.item(i);
+                  const form_data = new FormData();
+                  form_data.append("userImage", file);
+                  form_data.append("idmember", memberid);
+                  form_data.append("filename", file.name);
+                  form_data.append("isavatar", 1);
+                  fetch("memberdocument.php", {
+                    method: "POST",
+                    body: form_data,
+                  }).then((response) => {
+                    document.getElementById("avatarFile").value = "";
+                  });
+                }
+              }
+            });
+            setTimeout(() => {
+              document.getElementById("printpdf").style.display = "block";
+              document.getElementById("updatebtn").style.display = "block";
+              document.getElementById("loaderid").style.display = "none";
+              snackbarFunction(2);
+            }, 1500);
+          });
+        }
+      }
+
+      function filterFunction() {
+        var input, filter, ul, li, a, i;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        div = document.getElementById("myDropdown");
+        a = div.getElementsByTagName("a");
+        for (i = 0; i < a.length; i++) {
+          txtValue = a[i].textContent || a[i].innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            a[i].style.display = "";
+          } else {
+            a[i].style.display = "none";
+          }
+        }
+      }
+
+      function loadgroupleader() {
+        fetch("memberdropdown.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+            "Access-Control-Allow-Origin": "*",
+          },
+        }).then((response) => {
+          response.text().then(function (text) {
+            var leaders = text.split(",_,");
+            leaders.pop();
+            var div = document.getElementById("myDropdown");
+            for (let i = 0; i < leaders.length; i++) {
+              var lead = leaders[i].split(",-,");
+              const a = document.createElement("a");
+              a.setAttribute(
+                "onclick",
+                "selectLeader(" +
+                  lead[0] +
+                  ",'" +
+                  lead[1] +
+                  "','" +
+                  lead[2] +
+                  "'" +
+                  ")"
+              );
+              a.innerText = lead[1] + " , " + lead[2];
+              div.appendChild(a);
+            }
+          });
+        });
+      }
+
+      function selectLeader(id, name, idno) {
+        document.getElementById("leaderName").innerHTML =
+          "&nbsp;" + name + " , " + idno + "&nbsp;";
+        document.getElementById("myDropdown").classList.toggle("show");
+        document.getElementById("iddropdown").style.display = "none";
+        document.getElementById("invisiblegroupleaderid").value = id;
+      }
+
+      function showdropdown() {
+        if (!document.getElementById("inputisgroupleader").checked) {
+          document.getElementById("iddropdown").style.display = "block";
+        } else {
+          document.getElementById("iddropdown").style.display = "none";
+          document.getElementById("leaderName").innerHTML = "";
+        }
+      }
+
+      function showFileNames(event) {
+        var input = document.getElementById("document");
+        var output = document.getElementById("filename");
+        var filename = "";
+        for (var i = 0; i < input.files.length; i++) {
+          if (i > 0) {
+            filename += "<br>";
+          }
+          filename += input.files[i].name;
+        }
+        output.innerHTML = filename;
+      }
+
+      function showpaymenthistory() {
+        document.getElementById("paymenthistory").style.display = "block";
+        document.getElementById("addmember").style.display = "none";
+        document.getElementById("btnmemberdetails").style.backgroundColor =
+          " #4F4F51";
+        document.getElementById("btnpaymenthistory").style.backgroundColor =
+          "#F58F7C";
+      }
+      function showMemberDetails() {
+        document.getElementById("paymenthistory").style.display = "none";
+        document.getElementById("addmember").style.display = "flex";
+        document.getElementById("btnmemberdetails").style.backgroundColor =
+          "#F58F7C";
+        // document.getElementById("btnpaymenthistory").style.backgroundColor =
+        //   " #4F4F51";
+      }
+
+      function savepaymenthistory() {
+        var paymentamount = document.getElementById("paymentinput").value;
+        var date = document.getElementById("date").value;
+        var memberId = document.getElementById("invisiblememberid").value;
+        fetch("paymenthistory.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+            "Access-Control-Allow-Origin": "*",
+          },
+          body: `payamount=${paymentamount}&actualdate=${date}&memberid=${memberId}`,
+        }).then((response) => {});
+      }
+
+      function searchEnabled() {
+        if (document.getElementById("searchinput").value == "") {
+          document.getElementById("submitBtn").style.display = "block";
+          document.getElementById("printpdf").style.display = "none";
+          document.getElementById("updatebtn").style.display = "none";
+        }
+        document.getElementById("submitBtn").style.display = "none";
+        document.getElementById("printpdf").style.display = "block";
+        document.getElementById("updatebtn").style.display = "block";
+      }
+
+      function searchMember() {
+        var inputSearch = document.getElementById("searchinput").value;
+        fetch("searchmember.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+          },
+          body: `inputSearch=${inputSearch}`,
+        }).then((response) => {
+          response.text().then(function (text) {
+            var result = text.split(",-,");
+            console.log(result);
+            document.getElementById("invisiblememberid").value = result[0];
+            document.getElementById("inputName").value = result[3];
+            document.getElementById("inputAadharno").value = result[5];
+            document.getElementById("inputnomineename").value = result[1];
+            document.getElementById("inputNomineeAadharno").value = result[2]; 
+            document.getElementById("inputMobile").value = result[6];
+            document.getElementById("inputPassword").value = result[7];
+            document.getElementById("inputAddress").value = result[8];
+            document.getElementById("inputBankdetails").value = result[9];
+            document.getElementById("inputisgroupleader").checked =
+              result[10] == 1 ? true : false;
+            document.getElementById("addmemberInput").style.display = "none";
+            document.getElementById("memberIdLabel").innerHTML = result[4];
+            document.getElementById("dateofjoin").value = result[11];
+            document.getElementById("leaderName").innerHTML = result[12];
+          });
+        });
+      }
+
+      window.onload = () => {
+        if (
+          sessionStorage.getItem("mmauth") === "0" ||
+          sessionStorage.getItem("mmauth") === null
+        ) {
+          window.location.href = "index.html";
+          return;
+        }
+        document.getElementById("submitBtn").style.display = "block";
+        document.getElementById("printpdf").style.display = "none";
+        document.getElementById("updatebtn").style.display = "none";
+        document.getElementById("iddropdown").style.display = "none";
+        showMemberDetails();
+        loadgroupleader();
+        showdropdown();
+      };
+
+      function snackbarFunction(type) {
+        var x = document.getElementById("snackbar");
+        if (type === 1) {
+          x.innerHTML = "Member Added Successfully";
+        }
+        if (type === 2) {
+          x.innerHTML = "Member Updated Successfully";
+        }
+        x.className = "show";
+        setTimeout(function () {
+          x.className = x.className.replace("show", "");
+        }, 1000);
+      }
+
+      function choosefiledocument() {
+        var idmember = document.getElementById("idmember").value;
+        var document = document.getElementById("document").value;
+        var filename = document.getElementById("filename").value;
+        fetch("memberdocument.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+            "Access-Control-Allow-Origin": "*",
+          },
+          body: `idmember=${idmember}&document=${document}&filename=${filename}`,
+        }).then((response) => {});
+      }
+
+      function readURL(input) {
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
+          reader.onload = function (e) {
+            var avatartFileEle = document.getElementById("avatarimg");
+            avatartFileEle.setAttribute("src", e.target.result);
+            avatartFileEle.style.width = "100%";
+            avatartFileEle.style.height = "100%";
+            // $('#avatarimg').attr('src', e.target.result).width(150).height(200);
+          };
+
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
+      function submitbutton(showAlert) {
+        document.getElementById("submitBtn").style.display = "none";
+        document.getElementById("loaderid").style.display = "block";
+        var inputName = document.getElementById("inputName").value;
+        var inputAadharno = document.getElementById("inputAadharno").value;
+        var inputnomineename = document.getElementById("inputnomineename").value;
+        var inputNomineeAadharno = document.getElementById("inputNomineeAadharno").value; 
+        var inputDoj = document.getElementById("dateofjoin").value;        
+        if (
+          inputAadharno.length > 12 ||
+          inputAadharno.length < 12 ||
+          inputAadharno == ""
+        ) {
+          document.getElementById("aadharError").style.display = "block";
+        }
+        if (
+          inputAadharno.length > 12 ||
+          inputAadharno.length < 12 ||
+          inputAadharno == ""
+        ) {
+          document.getElementById("nomineeaadharError").style.display = "block";
+        }
+        var inputMobile = document.getElementById("inputMobile").value;
+        if (
+          inputMobile.length > 10 ||
+          inputMobile.length < 10 ||
+          inputMobile == ""
+        ) {
+          document.getElementById("mobileError").style.display = "block";
+        }
+        if (inputAadharno.length === 12 && inputMobile.length === 10) {
+          var inputPassword = document.getElementById("inputPassword").value;
+          var inputAddress = document.getElementById("inputAddress").value;
+          var inputBankdetails =
+            document.getElementById("inputBankdetails").value;
+          var isgroupleader =
+            document.getElementById("inputisgroupleader").checked;
+          var inputisgroupleader = isgroupleader ? 1 : 0;
+          var result;
+          var invisiblegroupleaderid = document.getElementById(
+            "invisiblegroupleaderid"
+          ).value;
+          fetch("addmember.php", {
+            method: "POST",
+            headers: {
+              "Content-Type":
+                "application/x-www-form-urlencoded; charset=UTF-8",
+              "Access-Control-Allow-Origin": "*",
+            },
+            body: `name=${inputName}&aadharno=${inputAadharno}&nomineename=${inputnomineename}&nomineeaadharno=${inputNomineeAadharno}&mobilenumber=${inputMobile}&passwordInput=${inputPassword}&address=${inputAddress}&bankdetails=${inputBankdetails}&groupleader=${inputisgroupleader}&groupleaderid=${invisiblegroupleaderid}&doj=${inputDoj}&showAlert=${showAlert}`,
+          }).then((response) => {
+            if (response.status === 200) {
+              result = "data received successfully";
+            } else if (response.status === 404) {
+              result = "Requested data not found.";
+            } else if (response.status === 400) {
+              result = "not a correct syntax.";
+            } else if (response.status === 409) {
+              result = "Requested data not found.";
+            } else if (response.status === 408) {
+              if (confirm('Aadhar already exist with another profile click "OK" to continue saving')) {
+                submitbutton(true);
+              } else {
+                console.log("skipped with overwritting aadhar..")
+              }
+              
+            } else {
+              console.log(`Error:`);
+            }
+            document.getElementById("aadharError").style.display = "none";
+            document.getElementById("nomineeaadharError").style.display = "none";
+            document.getElementById("mobileError").style.display = "none";
+
+            response.text().then(function (text) {
+              var inputFiles = document.getElementById("document");
+              if (inputFiles.files.length > 0) {
+                const files = inputFiles.files;
+                for (let i = 0; i < files.length; i++) {
+                  let file = files.item(i);
+                  const form_data = new FormData();
+                  form_data.append("userImage", file);
+                  form_data.append("idmember", text);
+                  form_data.append("filename", file.name);
+                  form_data.append("isavatar", 0);
+                  fetch("memberdocument.php", {
+                    method: "POST",
+                    body: form_data,
+                  }).then((response) => {
+                    document.getElementById("document").value = "";
+                  });
+                }
+              }
+              var avatarfiles = document.getElementById("avatarFile");
+              if (avatarfiles.files.length > 0) {
+                const files = avatarfiles.files;
+                for (let i = 0; i < files.length; i++) {
+                  let file = files.item(i);
+                  const form_data = new FormData();
+                  form_data.append("userImage", file);
+                  form_data.append("idmember", text);
+                  form_data.append("filename", file.name);
+                  form_data.append("isavatar", 1);
+                  fetch("memberdocument.php", {
+                    method: "POST",
+                    body: form_data,
+                  }).then((response) => {
+                    document.getElementById("avatarFile").value = "";
+                  });
+                }
+              }
+            });
+
+            setTimeout(() => {
+              result = "";
+              document.getElementById("submitBtn").style.display = "block";
+              document.getElementById("inputName").value = "";
+              document.getElementById("inputAadharno").value = "";
+              document.getElementById("inputnomineename").value = "";
+              document.getElementById("inputNomineeAadharno").value = "";
+              document.getElementById("inputMobile").value = "";
+              document.getElementById("inputPassword").value = "";
+              document.getElementById("inputAddress").value = "";
+              document.getElementById("inputBankdetails").value = "";
+              document.getElementById("inputisgroupleader").value = "";
+              document.getElementById("leaderName").innerHTML = "";
+              document.getElementById("dateofjoin").value = "";
+              document.getElementById("choosefile").value = "";
+              document.getElementById("inputisgroupleader").checked = "";
+              document.getElementById("loaderid").style.display = "none";
+              snackbarFunction(1);
+            }, 2500);
+          });
+        }
+      }
+    </script>
+  </html>
+</html>

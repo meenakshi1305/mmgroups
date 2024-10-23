@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="icon" type="image/x-icon" href="logo.png">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+ 
+ <style>
+
+body{
+    background: #4F4F51;
+    }
+#log{
+    background-color: #F58F7C;
+    padding:30PX 40px;
+    margin-top:70px;
+    border-radius: 40px;
+        
+ }
+
+.input{
+    width: 40%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    color:aqua;
+}
+
+h2{
+    color:white;
+    text-align: center;
+    font-weight: bolder;
+    margin-top:-20px;
+}h6{
+
+
+    color:white;
+    text-align: center;
+    font-weight: bolder;
+    
+}
+.social_icon span {
+    font-size: 30px;
+    margin-left: 10px;
+    color: #FFC312;
+    padding:5px;
+}
+.social_icon span:hover{
+color: white;
+cursor: pointer;
+}
+.card-footer{
+    padding:10px;
+}
+
+.form-group{
+    color:aliceblue;
+}
+.form-check{
+    color:aliceblue;
+}
+button {
+  text-decoration: none;
+  font-size: 1rem;
+  color: var(--color);
+  transition: all 200ms ease-out;
+  padding:8px; 
+  background-color: #F58F7C;
+  font-weight:bold;
+  color:black;
+    border: 4px solid  #4F4F51;
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+button:hover {
+  font-size: 1.2rem;
+}
+
+button:hover ~ hr {
+  width: 100%;
+}
+
+hr {
+  width: 0px;
+  height: 3px;
+  background:  #4F4F51;
+  border:  #4F4F51;
+  margin: 0px;
+  transition: width 450ms ease-out;
+  z-index: 999;
+}
+/* The snackbar - position it at the bottom and in the middle of the screen */
+#snackbar {
+  visibility: hidden; /* Hidden by default. Visible on click */
+  min-width: 250px; /* Set a default minimum width */
+  margin-left: -125px; /* Divide value of min-width by 2 */
+  background-color: red; /* Black background color */
+  color: #fff; /* White text color */
+  text-align: center; /* Centered text */
+  border-radius: 2px; /* Rounded borders */
+  padding: 16px; /* Padding */
+  position: fixed; /* Sit on top of the screen */
+  z-index: 1; /* Add a z-index if needed */
+  left: 50%; /* Center the snackbar */
+  bottom: 30px; /* 30px from the bottom */
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#snackbar.show {
+  visibility: visible; /* Show the snackbar */
+  /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+  However, delay the fade out process for 2.5 seconds */
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+.password-input {
+    position: relative;
+}
+
+.password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.password-toggle i {
+    color: #999;
+}
+
+.password-toggle i:hover {
+    color: #333;
+}
+</style>
+
+</head>
+
+<body>
+
+    <div class ="container-fluid">
+       <div class="row" style="display: flex;
+       justify-content: center;
+       align-items: center;">
+        <div class="col-md-4 col-sm-4 col-xn-12">
+
+        <div id="log">
+
+            <div class="form-group" style=" justify-content: center; align-items: center; display: flex;  flex-direction: column; ">
+                <h2>LOGIN </h2>
+                <img src="logo.png" class="rounded-circle" alt="MKR Groups" width="80" height="80">
+            </div>
+
+            <div class="form-group">
+                 <label for="inputname" class="form-label">UserName</label>
+                 <input type="text" class="form-control" id="usernameid" placeholder="Enter username" required >
+            </div>
+                 
+            <div class="form-group">
+              <label for="inputpassword" class="form-label">Password</label>
+              <div class="password-input">
+                  <input type="password" class="form-control" id="passwordid" placeholder="Enter password" required>
+                  <span class="password-toggle" onclick="togglePasswordVisibility()">
+                      <i class="fas fa-eye"></i>
+                  </span>
+              </div>
+          </div>
+               
+            <!-- <button type="submit" onclick="location.href = 'main.html';"> LOGIN </button><hr> -->
+            <button type="submit" onclick="trylogin()"> LOGIN </button><hr>
+        </div>
+        <div id="snackbar"></div>
+          </div>
+     </div> 
+</body>
+<script>
+
+function snackbarFunction() {
+        var x = document.getElementById("snackbar");
+        
+          x.innerHTML= "Login failed";
+          x.className = "show";
+        setTimeout(function () {
+          x.className = x.className.replace("show", "");
+        }, 1000);
+      }
+
+      document.getElementById('passwordid')
+        .addEventListener('keyup', function(event) {
+            if (event.code === 'Enter')
+            {
+                event.preventDefault();
+                trylogin();
+            }
+        });
+
+    function trylogin(){       
+        
+        var username = document.getElementById("usernameid").value;
+        var password = document.getElementById("passwordid").value;
+        
+        fetch("user.php", {
+          method: "POST",
+          headers: {
+              "Content-Type":
+                "application/x-www-form-urlencoded; charset=UTF-8",
+              "Access-Control-Allow-Origin": "*",
+            },
+          body: `username=${username}&passwordInput=${password}`,
+        }).then((response) => {          
+          response.text().then(function (text) {
+            if(text==="0"){
+                console.log("loginfailed");
+                snackbarFunction();
+                sessionStorage.setItem("mmauth", 0);
+            }
+            else{
+                sessionStorage.setItem("mmauth", text);
+                window.location.href = "main.html";
+            }
+          });
+          
+        });
+    }
+    function togglePasswordVisibility() {
+    var passwordInput = document.getElementById("passwordid");
+    var passwordToggle = document.querySelector(".password-toggle");
+    
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text"; // Show password
+        passwordToggle.innerHTML = '<i class="fas fa-eye-slash"></i>'; // Change eye icon to slash
+    } else {
+        passwordInput.type = "password"; // Hide password
+        passwordToggle.innerHTML = '<i class="fas fa-eye"></i>'; // Change slash icon to eye
+    }
+}
+</script>
+</html>

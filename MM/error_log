@@ -1,0 +1,69 @@
+[05-Jan-2024 08:22:33 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/l2vt0v263c8s/public_html/site/dbconfig.php on line 10
+[05-Jan-2024 08:22:35 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/l2vt0v263c8s/public_html/site/dbconfig.php on line 10
+[05-Jan-2024 08:22:52 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/l2vt0v263c8s/public_html/site/dbconfig.php on line 10
+[05-Jan-2024 08:26:28 UTC] PHP Fatal error:  Uncaught Exception: FPDF error: Some data has already been output, can't send PDF file in /home/l2vt0v263c8s/public_html/site/fpdf/fpdf.php:273
+Stack trace:
+#0 /home/l2vt0v263c8s/public_html/site/fpdf/fpdf.php(1057): FPDF->Error('Some data has a...')
+#1 /home/l2vt0v263c8s/public_html/site/fpdf/fpdf.php(1003): FPDF->_checkoutput()
+#2 /home/l2vt0v263c8s/public_html/site/downloadallcustomer.php(91): FPDF->Output()
+#3 {main}
+  thrown in /home/l2vt0v263c8s/public_html/site/fpdf/fpdf.php on line 273
+[05-Jan-2024 08:27:13 UTC] PHP Fatal error:  Uncaught Exception: FPDF error: Some data has already been output, can't send PDF file in /home/l2vt0v263c8s/public_html/site/fpdf/fpdf.php:273
+Stack trace:
+#0 /home/l2vt0v263c8s/public_html/site/fpdf/fpdf.php(1057): FPDF->Error('Some data has a...')
+#1 /home/l2vt0v263c8s/public_html/site/fpdf/fpdf.php(1003): FPDF->_checkoutput()
+#2 /home/l2vt0v263c8s/public_html/site/downloadallcustomer.php(91): FPDF->Output()
+#3 {main}
+  thrown in /home/l2vt0v263c8s/public_html/site/fpdf/fpdf.php on line 273
+[05-Jan-2024 09:24:43 UTC] PHP Fatal error:  Uncaught Exception: FPDF error: Some data has already been output, can't send PDF file in /home/l2vt0v263c8s/public_html/site/fpdf/fpdf.php:273
+Stack trace:
+#0 /home/l2vt0v263c8s/public_html/site/fpdf/fpdf.php(1057): FPDF->Error('Some data has a...')
+#1 /home/l2vt0v263c8s/public_html/site/fpdf/fpdf.php(1003): FPDF->_checkoutput()
+#2 /home/l2vt0v263c8s/public_html/site/downloadallcustomer.php(91): FPDF->Output()
+#3 {main}
+  thrown in /home/l2vt0v263c8s/public_html/site/fpdf/fpdf.php on line 273
+[17-Jan-2024 07:56:57 UTC] PHP Fatal error:  Uncaught Exception: FPDF error: Some data has already been output, can't send PDF file in /home/l2vt0v263c8s/public_html/site/fpdf/fpdf.php:273
+Stack trace:
+#0 /home/l2vt0v263c8s/public_html/site/fpdf/fpdf.php(1057): FPDF->Error('Some data has a...')
+#1 /home/l2vt0v263c8s/public_html/site/fpdf/fpdf.php(1003): FPDF->_checkoutput()
+#2 /home/l2vt0v263c8s/public_html/site/downloadmemberloan.php(95): FPDF->Output()
+#3 {main}
+  thrown in /home/l2vt0v263c8s/public_html/site/fpdf/fpdf.php on line 273
+[17-Jan-2024 08:35:12 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method PDF::InsertText() in /home/l2vt0v263c8s/public_html/site/downloadmemberloan.php:95
+Stack trace:
+#0 {main}
+  thrown in /home/l2vt0v263c8s/public_html/site/downloadmemberloan.php on line 95
+[17-Jan-2024 08:35:15 UTC] PHP Fatal error:  Uncaught Error: Call to undefined method PDF::InsertText() in /home/l2vt0v263c8s/public_html/site/downloadmemberloan.php:95
+Stack trace:
+#0 {main}
+  thrown in /home/l2vt0v263c8s/public_html/site/downloadmemberloan.php on line 95
+[17-Jan-2024 08:37:15 UTC] PHP Fatal error:  Cannot declare class PDF, because the name is already in use in /home/l2vt0v263c8s/public_html/site/downloadmemberloan.php on line 96
+[17-Jan-2024 09:06:23 UTC] PHP Fatal error:  Uncaught Exception: FPDF error: Some data has already been output, can't send PDF file in /home/l2vt0v263c8s/public_html/site/fpdf/fpdf.php:273
+Stack trace:
+#0 /home/l2vt0v263c8s/public_html/site/fpdf/fpdf.php(1057): FPDF->Error('Some data has a...')
+#1 /home/l2vt0v263c8s/public_html/site/fpdf/fpdf.php(1003): FPDF->_checkoutput()
+#2 /home/l2vt0v263c8s/public_html/site/downloadmemberloan.php(146): FPDF->Output()
+#3 {main}
+  thrown in /home/l2vt0v263c8s/public_html/site/fpdf/fpdf.php on line 273
+[04-Feb-2024 13:36:20 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/l2vt0v263c8s/public_html/site/dbconfig.php on line 10
+[04-Feb-2024 13:36:22 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/l2vt0v263c8s/public_html/site/dbconfig.php on line 10
+[04-Feb-2024 13:36:31 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/l2vt0v263c8s/public_html/site/dbconfig.php on line 10
+[04-Feb-2024 13:38:42 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/l2vt0v263c8s/public_html/site/dbconfig.php on line 10
+[04-Feb-2024 13:38:49 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/l2vt0v263c8s/public_html/site/dbconfig.php on line 10
+[04-Feb-2024 13:38:51 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/l2vt0v263c8s/public_html/site/dbconfig.php on line 10
+[04-Feb-2024 13:39:18 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/l2vt0v263c8s/public_html/site/dbconfig.php on line 10
+[04-Feb-2024 13:41:24 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/l2vt0v263c8s/public_html/site/dbconfig.php on line 10
+[04-Feb-2024 13:41:26 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/l2vt0v263c8s/public_html/site/dbconfig.php on line 10
+[04-Feb-2024 13:41:27 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/l2vt0v263c8s/public_html/site/dbconfig.php on line 10
+[04-Feb-2024 13:41:27 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/l2vt0v263c8s/public_html/site/dbconfig.php on line 10
+[04-Feb-2024 13:41:32 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/l2vt0v263c8s/public_html/site/dbconfig.php on line 10
+[04-Feb-2024 13:41:44 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/l2vt0v263c8s/public_html/site/dbconfig.php on line 10
+[04-Feb-2024 13:42:29 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/l2vt0v263c8s/public_html/site/dbconfig.php on line 10
+[04-Feb-2024 13:42:48 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/l2vt0v263c8s/public_html/site/dbconfig.php on line 10
+[04-Feb-2024 13:42:51 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/l2vt0v263c8s/public_html/site/dbconfig.php on line 10
+[04-Feb-2024 13:42:52 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/l2vt0v263c8s/public_html/site/dbconfig.php on line 10
+[04-Feb-2024 13:42:52 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/l2vt0v263c8s/public_html/site/dbconfig.php on line 10
+[04-Feb-2024 13:42:56 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/l2vt0v263c8s/public_html/site/dbconfig.php on line 10
+[04-Feb-2024 13:42:59 UTC] PHP Warning:  mysqli_connect(): (HY000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/l2vt0v263c8s/public_html/site/dbconfig.php on line 10
+[04-Feb-2024 15:19:19 UTC] PHP Notice:  Undefined offset: 6 in /home/l2vt0v263c8s/public_html/site/downloadloan.php on line 17
+[04-Feb-2024 15:21:20 UTC] PHP Notice:  Undefined offset: 6 in /home/l2vt0v263c8s/public_html/site/downloadloan.php on line 17
